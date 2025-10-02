@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Văn bản QUTW</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding: 20px; background: #f7f9fc; }
+    header { text-align: center; margin-bottom: 30px; }
+    header h1 { color: #003399; margin: 0; }
+    .doc-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 20px; }
+    .doc-card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .doc-card h3 { font-size: 16px; margin: 0 0 10px; }
+    .btn { display: inline-block; padding: 8px 12px; background: #0b63d6; color: #fff; text-decoration: none; border-radius: 6px; }
+    .btn:hover { background: #094fa0; }
+    .upload-section { margin: 40px 0; text-align: center; }
+    .upload-section input[type=file] { margin: 10px 0; }
+    .preview { margin-top: 20px; }
+    .preview iframe { width: 100%; height: 500px; border: 1px solid #ccc; border-radius: 8px; }
+    footer { text-align: center; margin-top: 50px; color: #666; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Văn bản QUTW</h1>
+    <p>Trang văn kiện điện tử</p>
+  </header>
+
+  <section class="doc-list" id="docList">
+    <!-- Các văn bản sẽ đi vào đây -->
+    <div class="doc-card">
+      <h3>Văn bản mẫu 1</h3>
+      <a class="btn" href="assets/sample1.pdf" target="_blank">📥 Tải xuống</a>
+    </div>
+    <div class="doc-card">
+      <h3>Văn bản mẫu 2</h3>
+      <a class="btn" href="assets/sample2.pdf" target="_blank">📥 Tải xuống</a>
+    </div>
+  </section>
+
+  <section class="upload-section">
+    <h2>Upload & Xem PDF</h2>
+    <input type="file" id="pdfFile" accept="application/pdf">
+    <button onclick="previewPDF()">Xem PDF</button>
+    <div class="preview" id="previewArea">
+      <p><i>Chưa chọn file</i></p>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 VANBANQUTW
+  </footer>
+
+  <script>
+    function previewPDF(){
+      const inp = document.getElementById("pdfFile");
+      const area = document.getElementById("previewArea");
+      if (!inp.files || inp.files.length === 0) {
+        area.innerHTML = "<p style='color:red'>Vui lòng chọn file PDF.</p>";
+        return;
+      }
+      const file = inp.files[0];
+      const url = URL.createObjectURL(file);
+      area.innerHTML = `
+        <h3>${file.name}</h3>
+        <iframe src="${url}"></iframe>
+      `;
+    }
+  </script>
+</body>
+</html>
